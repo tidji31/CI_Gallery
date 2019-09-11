@@ -1,3 +1,6 @@
+<?php
+defined('BASEPATH') OR exit('No direct script access allowed');
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -9,6 +12,13 @@
     <link rel="stylesheet" href="assets/Dropzone/dropzone.css">
     <script src="assets/Dropzone/dropzone.js"></script>
     <script src="https://kit.fontawesome.com/bae0b397aa.js"></script>
+    <script>
+    // Add restrictions
+    Dropzone.options.fileupload = {
+      acceptedFiles: 'image/*',
+      maxFilesize: 4 // MB
+    };
+    </script>
     <title>CI_Gallery</title>
 </head>
 <body>
@@ -22,9 +32,10 @@
         <div class="logoarea pt-5 pb-5 ">
         
        
-      <form  class="dropzone" action="<?php echo base_url();?>uploadimg" method="post"  id="my-awesome-dropzone" enctype="multipart/form-data">
-      <input type="file" name="file" />
-      </form>
+   
+       <!-- Dropzone -->
+       <form action="<?= base_url('uploadimg') ?>" class="dropzone" id="fileupload">
+      </form> 
         <input type="button" id="fileSubmit" name="fileSubmit" value="Add" class="btn btn-primary mt-3">
    
         </div>

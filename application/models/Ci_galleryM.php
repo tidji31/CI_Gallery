@@ -2,19 +2,19 @@
 class Ci_galleryM extends CI_Model
 {
     public function getGallery(){
-        return $this->db->get('images')->result();
-    }
+    return $this->db->get('images')->result();
+                                }
+
+
 
     public function photoupload($imagename){
-     
-        $data = array( 
-            'img_name'	=>  $imagename, 
-            'created'=> date("Y-m-d H:i:s")
-           
-        );
-    $this-> db->insert_string('images', $data);
+    $data = array(
+    'img_name'	=>  $imagename      
+                 );
+    $this->db->insert('images', $data);
+    
 
-    }
+                                          }
  /*
     public function save($param){
         $data = array(

@@ -1,5 +1,5 @@
 <?php
-
+defined('BASEPATH') OR exit('No direct script access allowed');
 class Ci_gallery extends CI_Controller{ 
     
     public function index() {
@@ -23,37 +23,32 @@ class Ci_gallery extends CI_Controller{
                                }
     
       
-    public function uploadimg()  {
+    
         
-        if($this->input->post('fileSubmit') && !empty($_FILES['files']['name'])){
-        
-        // File upload configuration
-        $uploadPath = 'assets/upload/';
-        $config['upload_path'] = $uploadPath;
-        $config['allowed_types'] = 'jpg|jpeg|png|gif';
-        // Load and initialize upload library
-        $this->load->library('upload', $config);
-        $this->upload->initialize($config);
-        // Uploaded file data
-        if ( ! $this->upload->do_upload('file'))
-                                                    {
-                                                     //vérifier les erreurs
-                                                    $error = array('error' => $this->upload->display_errors());
-                                                    $this->session->set_flashdata('verifier_photo', '<div class="alert alert-danger text-center">'.$this->upload->display_errors().'</div>');
-                                                    redirect('Ci_gallery');
-                                                    }
-       else
-                                                    {
-                                                    //télécharger la photo
-                                                    $upload_data = $this->upload->data();
-                                                    $image_name = $upload_data['file_name'];
-                                                    $this->Ci_galleryM->photoupload($imagename);
-                                                    $this->session->set_flashdata('verifier_photo', '<div class="alert alert-success text-center">votre photo de profile a été ajouté</div>');
-                                                    redirect('Ci_gallery');
-                                                    }
-   
-                                        }
-                                    }
+        // File upload
+  public function uploadimg(){
+
+    if(!empty($_FILES['file']['name'])){
+ 
+      // Set preference
+      $config['upload_path'] = 'assets/uploads/'; 
+      $config['allowed_types'] = 'jpg|jpeg|png|gif';
+      $config['max_size'] = '30720'; // max_size in kb 30m
+      $config['file_name'] = $_FILES['file']['name'];
+ 
+      //Load upload library
+      $this->load->library('upload',$config); 
+ 
+      // File upload
+      if($this->upload->do_upload('file')){
+        // Get data about the file
+        $uploadData = $this->upload->data();
+        $image_name = $uploadData['file_name'];
+        $this->Ci_galleryM->photoupload($image_name);
+      }
+    }
+ 
+  }
 
 
                               
