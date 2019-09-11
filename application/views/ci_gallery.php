@@ -12,13 +12,28 @@ defined('BASEPATH') OR exit('No direct script access allowed');
     <link rel="stylesheet" href="assets/Dropzone/dropzone.css">
     <script src="assets/Dropzone/dropzone.js"></script>
     <script src="https://kit.fontawesome.com/bae0b397aa.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script>
-    // Add restrictions
-    Dropzone.options.fileupload = {
-      acceptedFiles: 'image/*',
-      maxFilesize: 4 // MB
-    };
-    </script>
+//Disabling autoDiscover
+Dropzone.autoDiscover = false;
+
+$(function() {
+    //Dropzone class
+    var myDropzone = new Dropzone(".dropzone", {
+		url: "uploadimg",
+		paramName: "file",
+		maxFilesize: 3,
+		maxFiles: 10,
+		acceptedFiles: "image/*",
+		autoProcessQueue: false
+	});
+	
+	$('#startUpload').click(function(){           
+		myDropzone.processQueue();
+	});
+});
+</script>
+
     <title>CI_Gallery</title>
 </head>
 <body>
@@ -34,9 +49,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
        
    
        <!-- Dropzone -->
-       <form action="<?= base_url('uploadimg') ?>" class="dropzone" id="fileupload">
-      </form> 
-        <input type="button" id="fileSubmit" name="fileSubmit" value="Add" class="btn btn-primary mt-3">
+       <div class="dropzone">hna</div>
+       <button id="startUpload">UPLOAD</button>
    
         </div>
     </div>
