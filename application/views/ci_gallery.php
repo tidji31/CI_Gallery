@@ -58,14 +58,15 @@ $(function() {
 <!-- First Half -->
 
 <div class="col-md-6 p-0  h-md-100">
-    <div class="text-white d-md-flex align-items-center h-md-100 p-5   justify-content-center">
+    <div class="col-md-12 justify-content-center">
         <div class="logoarea pt-5 pb-5 ">
         
        
    
        <!-- Dropzone -->
-       <div class="dropzone">hna</div>
-       <button id="startUpload" class="btn btn-success"><i class="fas fa-upload"></i> UPLOAD</button>
+       <div class="dropzone mw-100"></div>
+       <br>
+       <button id="startUpload" class="btn btn-success col-md-3"><i class="fas fa-upload"></i> UPLOAD</button>
    
         </div>
     </div>
