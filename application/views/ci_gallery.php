@@ -26,7 +26,7 @@ $(function() {
 		url: "uploadimg",
         addRemoveLinks: true,
 		paramName: "file",
-		maxFilesize: 3,
+		maxFilesize: 60,
 		maxFiles: 10,
 		acceptedFiles: "image/*",
 		autoProcessQueue: false
@@ -80,14 +80,16 @@ $(function() {
             <!-- Swiper -->
             <div class="swiper-container">
           <div class="swiper-wrapper">
-      <?php foreach ($result as $val) {
-      echo"     
-          <div class='swiper-slide' >
-          <img src='assets/uploads/".$val->img_name." ' alt=''  style='heught:100%; width:100%'>
-          </div> 
-           
-          " ;}
-             ?> 
+      <?php if (!(isset($result))) { 
+      echo"<img src='assets/images/no_image_available.jpg'>" ;}
+        
+        else{
+            foreach ($result as $val) {
+     echo " <div class='swiper-slide' >
+            <img src='assets/uploads/".$val->img_name."' alt=''  style='heught:100%; width:100%'>
+            </div>";
+        }
+            } ?> 
     </div>
       <!-- Add Pagination -->
       <!-- If we need pagination -->

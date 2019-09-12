@@ -33,7 +33,7 @@ class Ci_gallery extends CI_Controller{
       // Set preference
       $config['upload_path'] = FCPATH .'assets/uploads/'; 
       $config['allowed_types'] = 'jpg|jpeg|png|gif';
-      $config['max_size'] = '30720'; // max_size in kb 30m
+      $config['max_size'] = '61440'; // max_size in kb 30m
       $config['file_name'] = $_FILES['file']['name'];
       //whatermarked
       
