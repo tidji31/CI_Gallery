@@ -40,9 +40,7 @@ $(function() {
         myDropzone.on("error", function (data) {
         $("#msg").html('<div class="alert alert-danger"></div>');
     });
-        myDropzone.on("success", function (data) {
-        $("#msg").html('<div class="alert alert-success"></div>');
-    })
+        
    
 
 });

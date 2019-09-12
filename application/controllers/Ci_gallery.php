@@ -26,9 +26,9 @@ class Ci_gallery extends CI_Controller{
     
         
         // File upload
-  public function uploadimg(){
+      public function uploadimg(){
 
-    if(!empty($_FILES['file']['name'])){
+      if(!empty($_FILES['file']['name'])){
  
       // Set preference
       $config['upload_path'] = FCPATH .'assets/uploads/'; 
@@ -38,14 +38,15 @@ class Ci_gallery extends CI_Controller{
       //whatermarked
       
  
-      //Load upload library
-      $this->load->library('upload',$config); 
-      $this->session->set_flashdata('msg', '<div class="alert alert-success col-md-6>Your image has been uploaded successfully<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button></div>');
-         // File upload
-         if($this->upload->do_upload('file')){    
+        //Load upload library
+        $this->load->library('upload',$config); 
+        $this->session->set_flashdata('msg', '<div class="alert alert-success col-md-6">Your image has been uploaded successfully<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button></div>');
+        // File upload
+        if($this->upload->do_upload('file')){    
         // Get data about the file
         $uploadData = $this->upload->data();
         $image_name = $uploadData['file_name'];
+        //Insert image name in database  
         $this->Ci_galleryM->photoupload($image_name);
         redirect('Ci_gallery');
     
