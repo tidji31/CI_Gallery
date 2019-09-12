@@ -35,17 +35,24 @@ class Ci_gallery extends CI_Controller{
       $config['allowed_types'] = 'jpg|jpeg|png|gif';
       $config['max_size'] = '30720'; // max_size in kb 30m
       $config['file_name'] = $_FILES['file']['name'];
+      //whatermarked
+      
  
       //Load upload library
       $this->load->library('upload',$config); 
- 
-      // File upload
-      if($this->upload->do_upload('file')){
+      $this->session->set_flashdata('msg', '<div class="alert alert-success col-md-6>Your image has been uploaded successfully<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button></div>');
+         // File upload
+         if($this->upload->do_upload('file')){    
         // Get data about the file
         $uploadData = $this->upload->data();
         $image_name = $uploadData['file_name'];
         $this->Ci_galleryM->photoupload($image_name);
-      }
+        redirect('Ci_gallery');
+    
+        }else{
+        $this->session->set_flashdata('msg', '<div class="alert alert-danger col-md-6">Image not uploaded 2 !! <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button></div>');
+        redirect('Ci_gallery');
+             }
     }
  
   }
