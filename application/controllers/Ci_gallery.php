@@ -22,20 +22,40 @@ class Ci_gallery extends CI_Controller{
 
                                }
     
-      
+      public function watermarking($image_name){
+                                  
+          $config['source_image'] = 'assets/uploads/'.$image_name;
+          $config['wm_text'] = 'CI_Gallery';
+          $config['wm_type'] = 'text';
+          $config['wm_font_path'] = './system/fonts/texb.ttf';
+          $config['wm_font_size'] = '64';
+          $config['wm_font_color'] = '343a40';
+          $config['wm_vrt_alignment'] = 'middle';
+          $config['wm_hor_alignment'] = 'center';
+          $config['wm_padding'] = '20';
+
+          $this->image_lib->initialize($config);
+          
+          if ( ! $this->image_lib->watermark())
+        {
+        echo $this->image_lib->display_errors();
+        }
+                                      
+
+      }
     
         
         // File upload
-      public function uploadimg(){
+       public function uploadimg(){
 
-      if(!empty($_FILES['file']['name'])){
+       if(!empty($_FILES['file']['name'])){
  
-      // Set preference
-      $config['upload_path'] = FCPATH .'assets/uploads/'; 
-      $config['allowed_types'] = 'jpg|jpeg|png|gif';
-      $config['max_size'] = '61440'; // max_size in kb 30m
-      $config['file_name'] = $_FILES['file']['name'];
-      //whatermarked
+       // Set preference
+       $config['upload_path'] = FCPATH .'assets/uploads/'; 
+       $config['allowed_types'] = 'jpg|jpeg|png|gif';
+       $config['max_size'] = '61440'; // max_size in kb 30m
+       $config['file_name'] = $_FILES['file']['name'];
+       //whatermarked
       
  
         
@@ -52,8 +72,11 @@ class Ci_gallery extends CI_Controller{
           
           //Insert image name in database  
           $this->Ci_galleryM->photoupload($image_name);
+          //watermarking image 
+          $this->watermarking($image_name);
+
           $this->session->set_flashdata('msg', '<div class="alert alert-success col-md-6">Your image has been uploaded successfully<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button></div>');
-          redirect('Ci_gallery');
+          redirect('Ci_gallery',refresh);
       
           }
           else{

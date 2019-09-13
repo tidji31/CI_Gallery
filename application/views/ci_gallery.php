@@ -37,9 +37,7 @@ $(function() {
         window.location.href = "<?php echo site_url('Ci_gallery'); ?>";
 	});
     
-        myDropzone.on("error", function (data) {
-        $("#msg").html('<div class="alert alert-danger"></div>');
-    });
+    
         
    
 
