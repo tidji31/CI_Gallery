@@ -15,6 +15,16 @@ class Ci_galleryM extends CI_Model
     
 
                                           }
+    public function chek($imagename){
+        $this->db->where('img_name',$imagename);
+        $query = $this->db->get('images');
+        if ($query->num_rows() > 0){
+        return true;
+                                   }
+        else{
+        return false;
+            }
+                                     }
  /*
     public function save($param){
         $data = array(

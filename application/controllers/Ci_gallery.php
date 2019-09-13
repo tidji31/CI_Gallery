@@ -38,22 +38,36 @@ class Ci_gallery extends CI_Controller{
       //whatermarked
       
  
-        //Load upload library
-        $this->load->library('upload',$config); 
-        $this->session->set_flashdata('msg', '<div class="alert alert-success col-md-6">Your image has been uploaded successfully<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button></div>');
-        // File upload
+        
+        //check if image exist
+        $chek=$this->Ci_galleryM->chek($_FILES['file']['name']);
+        if ($chek === FALSE){
+            //Load upload library
+        $this->load->library('upload',$config);
+           // File upload
         if($this->upload->do_upload('file')){    
-        // Get data about the file
-        $uploadData = $this->upload->data();
-        $image_name = $uploadData['file_name'];
-        //Insert image name in database  
-        $this->Ci_galleryM->photoupload($image_name);
-        redirect('Ci_gallery');
-    
-        }else{
-        $this->session->set_flashdata('msg', '<div class="alert alert-danger col-md-6">Image not uploaded 2 !! <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button></div>');
-        redirect('Ci_gallery');
-             }
+          // Get data about the file
+          $uploadData = $this->upload->data();
+          $image_name = $uploadData['file_name'];
+          
+          //Insert image name in database  
+          $this->Ci_galleryM->photoupload($image_name);
+          $this->session->set_flashdata('msg', '<div class="alert alert-success col-md-6">Your image has been uploaded successfully<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button></div>');
+          redirect('Ci_gallery');
+      
+          }
+          else{
+          $this->session->set_flashdata('msg', '<div class="alert alert-danger col-md-6">Image not uploaded  !! <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button></div>');
+          redirect('Ci_gallery');
+               }
+          }else{
+          $this->session->set_flashdata('msg', '<div class="alert alert-danger col-md-6">this file already exists !! <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button></div>');
+          redirect('Ci_gallery');
+               }
+
+       
+
+
     }
  
   }

@@ -27,7 +27,7 @@ $(function() {
         addRemoveLinks: true,
 		paramName: "file",
 		maxFilesize: 60,
-		maxFiles: 10,
+		maxFiles: 3,
 		acceptedFiles: "image/*",
 		autoProcessQueue: false
 	});
@@ -76,7 +76,7 @@ $(function() {
     <?php echo $msg ; ?> 
     <div class="d-md-flex align-items-center h-md-100 p-5 justify-content-center">
             <!-- Swiper -->
-            <div class="swiper-container">
+            <div class="swiper-container ">
           <div class="swiper-wrapper">
       <?php if (!(isset($result))) { 
       echo"<img src='assets/images/no_image_available.jpg'>" ;}
@@ -84,7 +84,7 @@ $(function() {
         else{
             foreach ($result as $val) {
      echo " <div class='swiper-slide' >
-            <img src='assets/uploads/".$val->img_name."' alt=''  style='heught:100%; width:100%'>
+            <img src='assets/uploads/".$val->img_name."' alt='".$val->img_name."'  style='heught:100%; width:100%'>
             </div>";
         }
             } ?> 
@@ -94,8 +94,9 @@ $(function() {
       <div class="swiper-pagination"></div>        
       </div>
       <!-- If we need navigation buttons -->
-      <div class="swiper-button-prev swiper-button-white"></div>
-      <div class="swiper-button-next swiper-button-white"></div>
+      <!-- navigation buttons -->
+      <div id="js-prev1" class="swiper-button-prev"></div>
+     <div id="js-next1" class="swiper-button-next"></div>
     </div>
 
     
@@ -164,6 +165,17 @@ var mySwiper = new Swiper(sliderSelector, options);
 
 // Initialize slider
 mySwiper.init();
+var mySwiper = document.querySelector('.swiper-container').swiper
+
+$(".swiper-container").mouseenter(function() {
+  mySwiper.autoplay.stop();
+  //console.log('slider stopped');
+});
+
+$(".swiper-container").mouseleave(function() {
+  mySwiper.autoplay.start();
+ // console.log('slider started again');
+})
   </script>
     
 </body>
