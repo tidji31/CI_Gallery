@@ -63,7 +63,8 @@ $(function() {
        <div class="dropzone mw-100"></div>
        <br>
        <button id="startUpload" class="btn btn-success col-md-3"><i class="fas fa-upload"></i> UPLOAD</button>
-   
+       <button id="rename" class="btn btn-warning col-md-3" style="display: none;"><i class="fas fa-upload"></i> RENAME</button>
+       <button id="delete" class="btn btn-danger col-md-3" style="display: none;"><i class="fas fa-upload"></i> DELETE</button>
         </div>
     </div>
 </div>
@@ -81,8 +82,8 @@ $(function() {
         
         else{
             foreach ($result as $val) {
-     echo " <div class='swiper-slide' >
-            <img src='assets/uploads/".$val->img_name."' alt='".$val->img_name."'  style='heught:100%; width:100%'>
+     echo " <div class='swiper-slide' onlclick='deleterename()'  >
+            <img src='assets/uploads/".$val->img_name."' alt='".$val->img_name."' onlclick='deleterename()'  style='heught:100%; width:100%'>
             </div>";
         }
             } ?> 
@@ -121,6 +122,7 @@ var sliderSelector = '.swiper-container',
       speed:800,
       slidesPerView: 2, // or 'auto'
       // spaceBetween: 10,
+      
       centeredSlides : true,
       effect: 'coverflow', // 'cube', 'fade', 'coverflow',
       coverflowEffect: {
@@ -129,6 +131,7 @@ var sliderSelector = '.swiper-container',
         depth: 100, // Depth offset in px (slides translate in Z axis)
         modifier: 1, // Effect multipler
         slideShadows : true, // Enables slides shadows
+        clickable: true,
       },
       grabCursor: true,
       parallax: true,
@@ -152,11 +155,13 @@ var sliderSelector = '.swiper-container',
         }
       },
       loop: true,
+      
       // Events
       on: {
         imagesReady: function(){
           this.el.classList.remove('loading');
         }
+      
       }
     };
 var mySwiper = new Swiper(sliderSelector, options);
@@ -174,7 +179,19 @@ $(".swiper-container").mouseleave(function() {
   mySwiper.autoplay.start();
  // console.log('slider started again');
 })
+mySwiper.on('click', function () {
+    document.getElementById("startUpload").style="display: none;"
+    document.getElementById("startUpload").style="display: block;"
+    document.getElementById("startUpload").style="display: block;"
+});
   </script>
+   <script>
+    function deleterename(){
+    document.getElementById("startUpload").style="display: none;"
+    document.getElementById("startUpload").style="display: block;"
+    document.getElementById("startUpload").style="display: block;"
+   }
+   </script>
     
 </body>
 
