@@ -63,8 +63,12 @@ $(function() {
        <div class="dropzone mw-100"></div>
        <br>
        <button id="startUpload" class="btn btn-success col-md-3"><i class="fas fa-upload"></i> UPLOAD</button>
-       <button id="rename" class="btn btn-warning col-md-3" style="display: none;"><i class="fas fa-upload"></i> RENAME</button>
-       <button id="delete" class="btn btn-danger col-md-3" style="display: none;"><i class="fas fa-upload"></i> DELETE</button>
+       <div id="rd" class="row" style="display: none;">
+       <button id="rename" class="btn btn-warning col-md-3" ><i class="fas fa-pencil-alt"></i> RENAME</button>
+       <button id="delete" class="btn btn-danger col-md-3" ><i class="far fa-trash-alt"></i> DELETE</button>
+       <img id="thum" style="border: 1px solid #ddd;border-radius: 4px;padding: 5px;width: 150px;" src="">
+          
+      </div>
         </div>
     </div>
 </div>
@@ -82,8 +86,8 @@ $(function() {
         
         else{
             foreach ($result as $val) {
-     echo " <div class='swiper-slide' onlclick='deleterename()'  >
-            <img src='assets/uploads/".$val->img_name."' alt='".$val->img_name."' onlclick='deleterename()'  style='heught:100%; width:100%'>
+     echo " <div class='swiper-slide'  >
+            <img src='assets/uploads/".$val->img_name."' onclick='rd(this.src)'' alt='".$val->img_name."'   style='heught:100%; width:100%'>
             </div>";
         }
             } ?> 
@@ -103,7 +107,14 @@ $(function() {
     
 </div>
 
-
+<script>
+function rd(img) {
+  
+    document.getElementById('startUpload').style.display='none';
+    document.getElementById('rd').style.display='block';
+    document.getElementById('thum').src = img ;
+}
+</script>
   <!--to close messages in 3"  -->
   <script>
     window.setTimeout(function() {
@@ -119,6 +130,8 @@ var sliderSelector = '.swiper-container',
     options = {
       init: false,
       loop: true,
+      preventClicks: true,
+      preventClicksPropagation: false ,
       speed:800,
       slidesPerView: 2, // or 'auto'
       // spaceBetween: 10,
@@ -154,15 +167,20 @@ var sliderSelector = '.swiper-container',
           spaceBetween: 0
         }
       },
-      loop: true,
-      
+       onClick: function(sw, e) {
+       e.preventDefault();
+       alert('clickSlide');
+                                },
+       onTap: function(sw, e) {
+       e.preventDefault();
+       sw.allowClick = false;
+                      },  
       // Events
       on: {
         imagesReady: function(){
           this.el.classList.remove('loading');
-        }
-      
-      }
+                               }
+          }
     };
 var mySwiper = new Swiper(sliderSelector, options);
 
@@ -179,19 +197,9 @@ $(".swiper-container").mouseleave(function() {
   mySwiper.autoplay.start();
  // console.log('slider started again');
 })
-mySwiper.on('click', function () {
-    document.getElementById("startUpload").style="display: none;"
-    document.getElementById("startUpload").style="display: block;"
-    document.getElementById("startUpload").style="display: block;"
-});
+
   </script>
-   <script>
-    function deleterename(){
-    document.getElementById("startUpload").style="display: none;"
-    document.getElementById("startUpload").style="display: block;"
-    document.getElementById("startUpload").style="display: block;"
-   }
-   </script>
+
     
 </body>
 
