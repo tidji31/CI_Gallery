@@ -96,7 +96,16 @@ class Ci_gallery extends CI_Controller{
   }
 
 
-                              
+      public function deletetheimage(){
+        $path=$this->input->post('path');
+        $id=$this->input->post('id');
+        if (!unlink($path)) {
+          echo ("Error deleting $path");
+        } else {
+          echo ("Deleted $path");
+        }
+
+      }           
     
     
     

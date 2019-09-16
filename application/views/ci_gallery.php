@@ -72,7 +72,7 @@ $(function() {
        <img id="thum"  src="">  
        <button id="rename" class="RE" ><i class="fas fa-pencil-alt"></i></button>
        <button id="delete" class="DE" ><i class="far fa-trash-alt"></i></button>
-       <button id="close" alt="close" onclick="rd(null , null)" class="CL" ><i class="fas fa-window-close" ></i></button>
+       <button id="close" alt="close" onclick="rd(null , null ,null ,null)" class="CL" ><i class="fas fa-window-close" ></i></button>
        </div>
 
        
@@ -95,7 +95,7 @@ $(function() {
         else{
             foreach ($result as $val) {
      echo " <div class='swiper-slide'  >
-            <img src='assets/uploads/".$val->img_name."' onclick='rd(this.src,this.alt)'' alt='".$val->img_name."'   style='heught:100%; width:100%'>
+            <img id='".$val->id."' name='".$val->img_name."' src='assets/uploads/".$val->img_name."' onclick='rd(this.src,this.alt,this.id,this.name)'' alt='".$val->img_name."'   style='heught:100%; width:100%'>
             </div>";
         }
             } ?> 
@@ -116,8 +116,10 @@ $(function() {
 </div>
 
 <script>
-function rd(img,name) {
-    if (img !== null && name != null)
+function rd(img,name,Id,name) {
+    var name = name ;
+    var id = Id;
+    if (img !== null && name != null )
     {
     document.getElementById('startUpload').style.display='none';
     document.getElementById('dropzone').style.display='none';
@@ -217,7 +219,29 @@ $(".swiper-container").mouseleave(function() {
 })
 
   </script>
-
+<script>
+    $(function(){
+        $( "#DE" ).click(function(event)
+        {
+            event.preventDefault();
+            var path= name;
+            
+            $.ajax(
+                {
+                    type:"post",
+                    url: "<?php echo base_url(); ?>Ci_gallery/deletetheimage",
+                    data:{ path:path,id:id},
+                    success:function(response)
+                    {
+                        console.log(response);
+                       
+                    }
+                   
+                }
+            );
+        });
+    });
+</script>
     
 </body>
 
