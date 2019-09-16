@@ -62,13 +62,20 @@ $(function() {
        <!-- Dropzone -->
        <div class="dropzone mw-100"></div>
        <br>
+       <div class="mw-100 pt-5 pb-5 ">
+       
        <button id="startUpload" class="btn btn-success col-md-3"><i class="fas fa-upload"></i> UPLOAD</button>
-       <div id="rd" class="row" style="display: none;">
-       <button id="rename" class="btn btn-warning col-md-3" ><i class="fas fa-pencil-alt"></i> RENAME</button>
-       <button id="delete" class="btn btn-danger col-md-3" ><i class="far fa-trash-alt"></i> DELETE</button>
-       <img id="thum" style="border: 1px solid #ddd;border-radius: 4px;padding: 5px;width: 150px;" src="">
-          
-      </div>
+
+       </div>
+       <div id="rd" class="mw-100 pt-5 pb-5 TH" style="display: none;">
+       <img id="thum"  src="">  
+       <button id="rename" class="RE" ><i class="fas fa-pencil-alt"></i></button>
+       <button id="delete" class="DE" ><i class="far fa-trash-alt"></i></button>
+       <button id="close" class="CL" ><i class="fas fa-window-close" ></i></button>
+       </div>
+
+       
+
         </div>
     </div>
 </div>
