@@ -60,18 +60,19 @@ $(function() {
        
    
        <!-- Dropzone -->
-       <div class="dropzone mw-100"></div>
+       <div id ="dropzone"class="dropzone mw-100"></div>
        <br>
-       <div class="mw-100 pt-5 pb-5 ">
+       <div class="">
        
-       <button id="startUpload" class="btn btn-success col-md-3"><i class="fas fa-upload"></i> UPLOAD</button>
-
+       <button id="startUpload" class="btn btn-success col-md-3"><i class="fas fa-upload"></i> Upload</button>
+       <h3 id="img-name"></h3>
        </div>
        <div id="rd" class="mw-100 pt-5 pb-5 TH" style="display: none;">
+       
        <img id="thum"  src="">  
        <button id="rename" class="RE" ><i class="fas fa-pencil-alt"></i></button>
        <button id="delete" class="DE" ><i class="far fa-trash-alt"></i></button>
-       <button id="close" class="CL" ><i class="fas fa-window-close" ></i></button>
+       <button id="close" alt="close" onclick="rd(null , null)" class="CL" ><i class="fas fa-window-close" ></i></button>
        </div>
 
        
@@ -94,7 +95,7 @@ $(function() {
         else{
             foreach ($result as $val) {
      echo " <div class='swiper-slide'  >
-            <img src='assets/uploads/".$val->img_name."' onclick='rd(this.src)'' alt='".$val->img_name."'   style='heught:100%; width:100%'>
+            <img src='assets/uploads/".$val->img_name."' onclick='rd(this.src,this.alt)'' alt='".$val->img_name."'   style='heught:100%; width:100%'>
             </div>";
         }
             } ?> 
@@ -115,11 +116,21 @@ $(function() {
 </div>
 
 <script>
-function rd(img) {
-  
+function rd(img,name) {
+    if (img !== null && name != null)
+    {
     document.getElementById('startUpload').style.display='none';
+    document.getElementById('dropzone').style.display='none';
     document.getElementById('rd').style.display='block';
     document.getElementById('thum').src = img ;
+    document.getElementById('img-name').innerHTML = name ;
+    }else{
+    document.getElementById('startUpload').style.display='block';
+    document.getElementById('dropzone').style.display='block';
+    document.getElementById('rd').style.display='none';
+    document.getElementById('img-name').innerHTML ='' ;
+    }
+    
 }
 </script>
   <!--to close messages in 3"  -->
