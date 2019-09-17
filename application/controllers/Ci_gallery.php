@@ -76,16 +76,15 @@ class Ci_gallery extends CI_Controller{
           $this->watermarking($image_name);
 
           $this->session->set_flashdata('msg', '<div class="alert alert-success col-md-6">Your image has been uploaded successfully<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button></div>');
-          redirect('Ci_gallery',refresh);
-      
+          
           }
           else{
           $this->session->set_flashdata('msg', '<div class="alert alert-danger col-md-6">Image not uploaded  !! <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button></div>');
-          redirect('Ci_gallery');
+          
                }
           }else{
           $this->session->set_flashdata('msg', '<div class="alert alert-danger col-md-6">this file already exists !! <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button></div>');
-          redirect('Ci_gallery');
+      
                }
 
        
@@ -97,12 +96,14 @@ class Ci_gallery extends CI_Controller{
 
 
       public function deletetheimage(){
-        $path=$this->input->post('path');
+        $path='assets/uploads/'.$this->input->post('path');
         $id=$this->input->post('id');
         if (!unlink($path)) {
           echo ("Error deleting $path");
         } else {
-          echo ("Deleted $path");
+          $this->Ci_galleryM->delete($id);
+          $this->session->set_flashdata('msg', '<div class="alert alert-warning col-md-6"> The image has bean deleted <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button></div>');
+          
         }
 
       }           

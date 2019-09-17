@@ -24,17 +24,20 @@ $(function() {
     //Dropzone class
     var myDropzone = new Dropzone(".dropzone", {
 		url: "uploadimg",
-        addRemoveLinks: true,
+    addRemoveLinks: true,
 		paramName: "file",
 		maxFilesize: 60,
 		maxFiles: 3,
 		acceptedFiles: "image/*",
-		autoProcessQueue: false
+		autoProcessQueue: false,
+    success: function (response) {
+    window.location.href = "<?php echo site_url(); ?>";          
+            }
 	});
     
 	$('#startUpload').click(function(){           
 		myDropzone.processQueue();
-        window.location.href = "<?php echo site_url('Ci_gallery'); ?>";
+        
 	});
     
     
@@ -69,10 +72,10 @@ $(function() {
        </div>
        <div id="rd" class="mw-100 pt-5 pb-5 TH" style="display: none;">
        
-       <img id="thum"  src="">  
+       <img id="thum" name="" alt="" src="">  
        <button id="rename" class="RE" ><i class="fas fa-pencil-alt"></i></button>
-       <button id="delete" class="DE" ><i class="far fa-trash-alt"></i></button>
-       <button id="close" alt="close" onclick="rd(null , null ,null ,null)" class="CL" ><i class="fas fa-window-close" ></i></button>
+       <button id="delete" class="DE" onclick="deleteimage()" ><i class="far fa-trash-alt"></i></button>
+       <button id="close" alt="close" onclick="rd()" class="CL" ><i class="fas fa-window-close" ></i></button>
        </div>
 
        
@@ -84,7 +87,7 @@ $(function() {
 <!-- Second Half -->
 
 <div class="col-md-6 p-0 bg-white h-md-100 ">
-    <?php echo $msg ; ?> 
+    <?php echo $this->session->flashdata('msg'); ?> 
     <div class="d-md-flex align-items-center h-md-100 p-5 justify-content-center">
             <!-- Swiper -->
             <div class="swiper-container ">
@@ -125,6 +128,8 @@ function rd(img,name,Id,name) {
     document.getElementById('dropzone').style.display='none';
     document.getElementById('rd').style.display='block';
     document.getElementById('thum').src = img ;
+    document.getElementById('thum').name = name ;
+    document.getElementById('thum').alt = Id ;
     document.getElementById('img-name').innerHTML = name ;
     }else{
     document.getElementById('startUpload').style.display='block';
@@ -134,6 +139,27 @@ function rd(img,name,Id,name) {
     }
     
 }
+</script>
+<script>
+        function deleteimage(){
+       
+           
+          var path= document.getElementById('thum').name;
+          var id=  document.getElementById('thum').alt;
+              $.ajax(
+                    {
+                    type:"post",
+                    dataType:"text", 
+                    url: "Ci_gallery/deletetheimage",
+                    data:{path:path,id:id},
+                    success:function(response)
+                    {
+                    window.location.href = "<?php echo site_url(''); ?>";                     
+                    }
+                    }
+                    );
+       
+                    }
 </script>
   <!--to close messages in 3"  -->
   <script>
@@ -219,29 +245,7 @@ $(".swiper-container").mouseleave(function() {
 })
 
   </script>
-<script>
-    $(function(){
-        $( "#DE" ).click(function(event)
-        {
-            event.preventDefault();
-            var path= name;
-            
-            $.ajax(
-                {
-                    type:"post",
-                    url: "<?php echo base_url(); ?>Ci_gallery/deletetheimage",
-                    data:{ path:path,id:id},
-                    success:function(response)
-                    {
-                        console.log(response);
-                       
-                    }
-                   
-                }
-            );
-        });
-    });
-</script>
+
     
 </body>
 

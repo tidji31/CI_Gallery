@@ -25,6 +25,12 @@ class Ci_galleryM extends CI_Model
         return false;
             }
                                      }
+    public function delete($id){
+               $this->db->where('id', $id);
+        return $this->db->delete('images');
+   
+
+    }
  /*
     public function save($param){
         $data = array(
