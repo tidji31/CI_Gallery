@@ -68,7 +68,10 @@ $(function() {
        <div class="">
        
        <button id="startUpload" class="btn btn-success col-md-3"><i class="fas fa-upload"></i> Upload</button>
-       <h3 id="img-name"></h3>
+       
+       <blockquote contenteditable="true" style="font-size: 32px;">
+       <p id="img-name"></p>
+       </blockquote>
        </div>
        <div id="rd" class="mw-100 pt-5 pb-5 TH" style="display: none;">
        
