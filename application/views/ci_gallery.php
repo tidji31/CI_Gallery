@@ -8,11 +8,13 @@ defined('BASEPATH') OR exit('No direct script access allowed');
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="assets/css/bootstrap.min.css">
+    
     <link rel="stylesheet" href="assets/css/style.css">
     <link rel="stylesheet" href="assets/Dropzone/dropzone.css"> 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.5.0/css/swiper.css">
       <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.5.0/css/swiper.min.css">
     <script src="assets/Dropzone/dropzone.js"></script>
+    <script rel="stylesheet" href="assets/js/bootstrap-input-spinner.js"></script>
     <script src="https://kit.fontawesome.com/bae0b397aa.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.5.0/js/swiper.min.js"></script>
@@ -76,10 +78,13 @@ $(function() {
        <div id="rd" class="mw-100 pt-5 pb-5 TH" style="display: none;">
        
        <img id="thum" name="" alt="" src="">  
-       <button id="rename" class="RE" ><i class="fas fa-pencil-alt"></i></button>
+       <button id="rename" class="RE" onclick="RE()"><i class="fas fa-pencil-alt"></i></button>
        <button id="delete" class="DE" onclick="deleteimage()" ><i class="far fa-trash-alt"></i></button>
        <button id="close" alt="close" onclick="rd()" class="CL" ><i class="fas fa-window-close" ></i></button>
-       </div>
+       
+       <p>Width: <input id="size" alt="" type="number" min="300" max="5000"value=""> Heigth: <input id="size" alt="" type="number" min="300" max="5000"value=""></p>
+       
+      </div>
 
        
 
@@ -134,6 +139,7 @@ function rd(img,name,Id,name) {
     document.getElementById('thum').name = name ;
     document.getElementById('thum').alt = Id ;
     document.getElementById('img-name').innerHTML = name ;
+    getimagesize(name);
     }else{
     document.getElementById('startUpload').style.display='block';
     document.getElementById('dropzone').style.display='block';
@@ -159,6 +165,25 @@ function rd(img,name,Id,name) {
                     {
                     window.location.href = "<?php echo site_url(''); ?>";                     
                     }
+                    }
+                    );
+       
+                    }
+</script>
+<script>
+        function getimagesize(name){
+              $.ajax(
+                    {
+                    type:"post",
+                    dataType:"html", 
+                    url: "Ci_gallery/getimagesize",
+                    data:{name:name},
+                    success:function(response)
+                    {
+                    
+                    document.getElementById('size').value= response;
+                     
+                  }
                     }
                     );
        
@@ -249,7 +274,7 @@ $(".swiper-container").mouseleave(function() {
 
   </script>
 
-    
+
 </body>
 
 </html>

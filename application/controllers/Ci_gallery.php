@@ -107,8 +107,34 @@ class Ci_gallery extends CI_Controller{
         }
 
       }           
+    public function resizetheimage(){
+
+      $config['image_library'] = 'gd2';
+      $config['source_image'] = 'assets/uploads/animal-animal-photography-deer-2877854.jpg';
+      $config['create_thumb'] = FALSE;
+      $config['maintain_ratio'] = TRUE;
+      $config['width']   = 75;
+      $config['height']  = 50;
+  
+      $this->image_lib->clear();
+      $this->image_lib->initialize($config);
+      $this->image_lib->resize();
+    }
+    public function getimagesize(){
     
-    
+      $path='assets/uploads/'.$this->input->post('name');;
+      // $id=$this->input->post('id');
+      if (!file_exists($path)) {
+        echo ("Error deleting $path");
+      } else {
+      //  $this->Ci_galleryM->delete($id);
+      list($width, $heigth)=getimagesize($path);
+      echo $width ; //.' x '.$heigth;
+        
+      }
+
+
+    }
     
 
 
