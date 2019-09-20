@@ -129,9 +129,11 @@ class Ci_gallery extends CI_Controller{
       } else {
       //  $this->Ci_galleryM->delete($id);
       list($width, $heigth)=getimagesize($path);
-      echo $width ; //.' x '.$heigth;
-        
-      }
+      //echo $width ; //.' x '.$heigth;
+      $response=array('width'=>$width,'heigth'=>$heigth);
+      echo json_encode($response);
+          }
+      
 
 
     }
