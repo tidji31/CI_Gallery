@@ -8,16 +8,17 @@ defined('BASEPATH') OR exit('No direct script access allowed');
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="assets/css/bootstrap.min.css">
-    
     <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-touchspin/4.2.5/jquery.bootstrap-touchspin.min.css">
     <link rel="stylesheet" href="assets/Dropzone/dropzone.css"> 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.5.0/css/swiper.css">
       <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.5.0/css/swiper.min.css">
     <script src="assets/Dropzone/dropzone.js"></script>
-    <script rel="stylesheet" href="assets/js/bootstrap-input-spinner.js"></script>
+   
     <script src="https://kit.fontawesome.com/bae0b397aa.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.5.0/js/swiper.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-touchspin/4.2.5/jquery.bootstrap-touchspin.min.js"></script>
     <script>
 //Disabling autoDiscover
 Dropzone.autoDiscover = false;
@@ -60,7 +61,7 @@ $(function() {
 
 <div class="col-md-6 p-0  h-md-100">
     <div class="col-md-12 justify-content-center">
-        <div class="logoarea pt-5 pb-5 ">
+        <div class="logoarea  mw-100">
         
        
    
@@ -75,14 +76,14 @@ $(function() {
        <p id="img-name"></p>
        </blockquote>
        </div>
-       <div id="rd" class="mw-100 pt-5 pb-5 TH" style="display: none;">
+       <div id="rd" class="pl-md-5  pt-5 pb-5 TH" style="display: none;">
        
        <img id="thum" name="" alt="" src="" class=" pb-5 ">  
        <button id="rename" class="RE" onclick="resize()" title='resize this image'><i class="fas fa-expand"></i></button>
        <button id="delete" class="DE" onclick="deleteimage()" title='delete this image' ><i class="far fa-trash-alt"></i></button>
        <button id="close" alt="close" onclick="rd()" class="CL" title='close this image'><i class="fas fa-window-close" ></i></button>
        
-       <p>Width: <input id="sizew" alt="" type="number" min="300" max="7000"value=""> Heigth: <input id="sizeh" alt="" type="number" min="300" max="7000"value=""></p>
+       <div class="SIZE">Width: <input id="sizew" name="size" alt="" type="text" class="form-control"  value=""> Heigth: <input id="sizeh" alt=""  name="size" type="text" class="form-control" value=""></div>
        
       </div>
 
@@ -296,7 +297,16 @@ $(".swiper-container").mouseleave(function() {
 
   </script>
 
-
+<script>
+            $("input[name='size']").TouchSpin({
+                min: 300,
+                max: 7000,
+                step: 1,              
+                boostat: 5,
+                maxboostedstep: 10,
+                postfix: 'PX'
+            });
+        </script>
 </body>
 
 </html>

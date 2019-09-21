@@ -22,12 +22,17 @@
 
 .TH {
   position: relative;
+  width: 100%;
+}
+.SIZE{
+  position: relative;
   width: 50%;
 }
 /* Make the image responsive */
 .TH img {
-  width: 200px;
-  height: 300px;
+ 
+  width: 300px;
+  height: 340px;
   border: 1px solid #ddd;
   border-radius: 4px;
   padding: 5px;
@@ -37,42 +42,42 @@
 /* Style the button and place it in the middle of the container/image */
 .TH .RE {
   position: absolute;
-  top: 326px;
-  left: 100px;
+  top: 365px;
+  left: 195px;
   transform: translate(-50%, -50%);
   -ms-transform: translate(-50%, -50%);
   background-color:#DF691A;
   color: white;
   font-size: 16px;
-  padding: 3px 6px;
+  padding: 6px 12px;
   border: 2px solid #4E5D6C;
   cursor: pointer;
   border-radius: 5px;
 }
 .TH .DE {
   position: absolute;
-  top: 326px;
-  left: 20px;
+  top: 365px;
+  left: 70px;
   transform: translate(-50%, -50%);
   -ms-transform: translate(-50%, -50%);
   background-color:#d9534f;
   color: white;
   font-size: 16px;
-  padding: 3px 6px;
+  padding: 6px 12px;
   border: 2px solid #4E5D6C;
   cursor: pointer;
   border-radius: 5px;
 }
 .TH .CL {
   position: absolute;
-  top: 326px;
-  left: 180px; 
+  top: 365px;
+  left: 325px; 
   transform: translate(-50%, -50%);
   -ms-transform: translate(-50%, -50%);
   background-color:#5cb85c;
   color: white;
   font-size: 16px;
-  padding: 3px 6px;
+  padding: 6px 12px;
   border: 2px solid #4E5D6C;
   cursor: pointer;
   border-radius: 5px;
