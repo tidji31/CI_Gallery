@@ -108,17 +108,26 @@ class Ci_gallery extends CI_Controller{
 
       }           
     public function resizetheimage(){
-
-      $config['image_library'] = 'gd2';
-      $config['source_image'] = 'assets/uploads/animal-animal-photography-deer-2877854.jpg';
-      $config['create_thumb'] = FALSE;
-      $config['maintain_ratio'] = TRUE;
-      $config['width']   = 75;
-      $config['height']  = 50;
-  
-      $this->image_lib->clear();
-      $this->image_lib->initialize($config);
-      $this->image_lib->resize();
+      $path=$this->input->post('path');
+      $w=$this->input->post('w');
+      $h=$this->input->post('h');
+      if (!isset($w) && !isset($h) && !isset($path)  ) 
+      {
+      echo ("Error resizing ");
+      }else{
+        $config['image_library'] = 'gd2';
+        $config['source_image'] = 'assets/uploads/'.$path;
+        $config['create_thumb'] = FALSE;
+        $config['maintain_ratio'] = FALSE;
+        $config['width']   = $w;
+        $config['height']  = $h;
+    
+        $this->image_lib->clear();
+        $this->image_lib->initialize($config);
+        $this->image_lib->resize();
+        $this->session->set_flashdata('msg', '<div class="alert alert-warning col-md-6"> The image has bean resized <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button></div>');
+      }
+     
     }
     public function getimagesize(){
     

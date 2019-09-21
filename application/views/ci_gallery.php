@@ -78,11 +78,11 @@ $(function() {
        <div id="rd" class="mw-100 pt-5 pb-5 TH" style="display: none;">
        
        <img id="thum" name="" alt="" src="" class=" pb-5 ">  
-       <button id="rename" class="RE" onclick="RE()"><i class="fas fa-pencil-alt"></i></button>
-       <button id="delete" class="DE" onclick="deleteimage()" ><i class="far fa-trash-alt"></i></button>
-       <button id="close" alt="close" onclick="rd()" class="CL" ><i class="fas fa-window-close" ></i></button>
+       <button id="rename" class="RE" onclick="resize()" title='resize this image'><i class="fas fa-expand"></i></button>
+       <button id="delete" class="DE" onclick="deleteimage()" title='delete this image' ><i class="far fa-trash-alt"></i></button>
+       <button id="close" alt="close" onclick="rd()" class="CL" title='close this image'><i class="fas fa-window-close" ></i></button>
        
-       <p>Width: <input id="sizew" alt="" type="number" min="300" max="5000"value=""> Heigth: <input id="sizeh" alt="" type="number" min="300" max="5000"value=""></p>
+       <p>Width: <input id="sizew" alt="" type="number" min="300" max="7000"value=""> Heigth: <input id="sizeh" alt="" type="number" min="300" max="7000"value=""></p>
        
       </div>
 
@@ -184,6 +184,28 @@ function rd(img,name,Id,name) {
                     document.getElementById('sizew').value= data["width"];
                     document.getElementById('sizeh').value= data["heigth"]; 
                   }
+                    }
+                    );
+       
+                    }
+</script>
+<script>
+        function resize(){
+       
+           
+          var path= document.getElementById('thum').name;
+          var w= document.getElementById('sizew').value;
+          var h= document.getElementById('sizeh').value;
+              $.ajax(
+                    {
+                    type:"post",
+                    dataType:"text", 
+                    url: "Ci_gallery/resizetheimage",
+                    data:{path:path,w:w,h:h},
+                    success:function(response)
+                    {
+                    window.location.href = "<?php echo site_url(''); ?>";                     
+                    }
                     }
                     );
        

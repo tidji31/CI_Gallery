@@ -37,8 +37,8 @@
 /* Style the button and place it in the middle of the container/image */
 .TH .RE {
   position: absolute;
-  top: 50%;
-  left: 180px;
+  top: 326px;
+  left: 100px;
   transform: translate(-50%, -50%);
   -ms-transform: translate(-50%, -50%);
   background-color:#DF691A;
@@ -52,7 +52,7 @@
 .TH .DE {
   position: absolute;
   top: 326px;
-  left: 180px;
+  left: 20px;
   transform: translate(-50%, -50%);
   -ms-transform: translate(-50%, -50%);
   background-color:#d9534f;
@@ -65,8 +65,8 @@
 }
 .TH .CL {
   position: absolute;
-  top: 69px;
-  left: 180px;
+  top: 326px;
+  left: 180px; 
   transform: translate(-50%, -50%);
   -ms-transform: translate(-50%, -50%);
   background-color:#5cb85c;
