@@ -18,6 +18,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
     <script src="https://kit.fontawesome.com/bae0b397aa.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.5.0/js/swiper.min.js"></script>
+    <script src="assets/js/ci_gallery.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-touchspin/4.2.5/jquery.bootstrap-touchspin.min.js"></script>
     <script>
 //Disabling autoDiscover
@@ -42,10 +43,6 @@ $(function() {
 		myDropzone.processQueue();
         
 	});
-    
-    
-        
-   
 
 });
 </script>
@@ -61,7 +58,7 @@ $(function() {
 
 <div class="col-md-6 p-0  h-md-100">
     <div class="col-md-12 justify-content-center">
-        <div class="logoarea  mw-100">
+        <div class="logoarea  mw-100 pt-5 pl-5 pr-5">
         
        
    
@@ -127,91 +124,7 @@ $(function() {
     
 </div>
 
-<script>
-function rd(img,name,Id,name) {
-    var name = name ;
-    var id = Id;
-    if (img !== null && name != null )
-    {
-    document.getElementById('startUpload').style.display='none';
-    document.getElementById('dropzone').style.display='none';
-    document.getElementById('rd').style.display='block';
-    document.getElementById('thum').src = img ;
-    document.getElementById('thum').name = name ;
-    document.getElementById('thum').alt = Id ;
-    document.getElementById('img-name').innerHTML = name ;
-    getimagesize(name);
-    }else{
-    document.getElementById('startUpload').style.display='block';
-    document.getElementById('dropzone').style.display='block';
-    document.getElementById('rd').style.display='none';
-    document.getElementById('img-name').innerHTML ='' ;
-    }
-    
-}
-</script>
-<script>
-        function deleteimage(){
-       
-           
-          var path= document.getElementById('thum').name;
-          var id=  document.getElementById('thum').alt;
-              $.ajax(
-                    {
-                    type:"post",
-                    dataType:"text", 
-                    url: "Ci_gallery/deletetheimage",
-                    data:{path:path,id:id},
-                    success:function(response)
-                    {
-                    window.location.href = "<?php echo site_url(''); ?>";                     
-                    }
-                    }
-                    );
-       
-                    }
-</script>
-<script>
-        function getimagesize(name){
-              $.ajax(
-                    {
-                    type:"post",
-                    dataType:"json", 
-                    url: "Ci_gallery/getimagesize",
-                    data:{name:name},
-                    success:function(data)
-                    {
-                      
-                    document.getElementById('sizew').value= data["width"];
-                    document.getElementById('sizeh').value= data["heigth"]; 
-                  }
-                    }
-                    );
-       
-                    }
-</script>
-<script>
-        function resize(){
-       
-           
-          var path= document.getElementById('thum').name;
-          var w= document.getElementById('sizew').value;
-          var h= document.getElementById('sizeh').value;
-              $.ajax(
-                    {
-                    type:"post",
-                    dataType:"text", 
-                    url: "Ci_gallery/resizetheimage",
-                    data:{path:path,w:w,h:h},
-                    success:function(response)
-                    {
-                    window.location.href = "<?php echo site_url(''); ?>";                     
-                    }
-                    }
-                    );
-       
-                    }
-</script>
+
   <!--to close messages in 3"  -->
   <script>
     window.setTimeout(function() {
@@ -299,8 +212,8 @@ $(".swiper-container").mouseleave(function() {
 
 <script>
             $("input[name='size']").TouchSpin({
-                min: 300,
-                max: 7000,
+                min: 100,
+                max: 6000,
                 step: 1,              
                 boostat: 5,
                 maxboostedstep: 10,
